@@ -24,12 +24,17 @@ import { JwtStrategy } from './common/strategies/jwt.strategy';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
+
         autoLoadEntities: true,
-        ssl: {
-          rejectUnauthorized: false,
-        },
         entities: [Service],
-        synchronize: true,
+
+        // === FIX SSL ===
+        ssl: configService.get('DB_SSL') === 'true'
+          ? { rejectUnauthorized: false }
+          : false,
+
+        synchronize: process.env.NODE_ENV !== 'production', // false en prod
+        migrationsRun: true,
       }),
     }),
     ServiceModule,
@@ -42,4 +47,4 @@ import { JwtStrategy } from './common/strategies/jwt.strategy';
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }
