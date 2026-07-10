@@ -16,14 +16,14 @@ export class CreateServiceDto {
   })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @ApiProperty({
     example: 'http://localhost:3001',
     description: 'URL du microservice',
   })
-  @IsUrl()
-  baseUrl: string;
+  @IsString()
+  baseUrl!: string;
 
   @ApiPropertyOptional({
     example: true,
@@ -38,5 +38,5 @@ export class CreateServiceDto {
   })
   @IsUUID()
   @IsNotEmpty()
-  chuId: string;
+  chuId!: string;
 }
