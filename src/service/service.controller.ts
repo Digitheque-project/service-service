@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 
 import {
@@ -46,8 +47,8 @@ export class ServiceController {
   @ApiOperation({
     summary: 'Lister les services',
   })
-  findAll() {
-    return this.serviceService.findAll();
+  findAll(@Query('chuId') chuId?: string) {
+    return this.serviceService.findAll(chuId);
   }
 
   @Get(':id')

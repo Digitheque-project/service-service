@@ -52,9 +52,10 @@ export class ServiceService {
     }
   }
 
-  async findAll() {
+  async findAll(chuId?: string) {
     try {
-      return await this.serviceRepo.find();
+      const where = chuId ? { chuId } : {};
+      return await this.serviceRepo.find({ where });
     } catch (error) {
       console.error(error);
       throw new InternalServerErrorException(
