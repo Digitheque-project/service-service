@@ -33,6 +33,7 @@ export class ServiceService {
       const service = this.serviceRepo.create({
         name: dto.name,
         baseUrl: dto.baseUrl,
+        type: dto.type,
         isActive: dto.isActive ?? true,
         chuId: dto.chuId,
       });
