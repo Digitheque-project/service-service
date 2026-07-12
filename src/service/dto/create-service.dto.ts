@@ -1,5 +1,6 @@
 import {
   IsBoolean,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -8,6 +9,7 @@ import {
 } from 'class-validator';
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ServiceType } from '../entities/service.entity';
 
 export class CreateServiceDto {
   @ApiProperty({
@@ -24,6 +26,15 @@ export class CreateServiceDto {
   })
   @IsString()
   baseUrl!: string;
+
+  @ApiProperty({
+    enum: ServiceType,
+    example: ServiceType.CLINIQUE,
+    description: 'Type de service',
+  })
+  @IsEnum(ServiceType)
+  @IsNotEmpty()
+  type!: ServiceType;
 
   @ApiPropertyOptional({
     example: true,
